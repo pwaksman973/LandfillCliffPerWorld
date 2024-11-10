@@ -1,3 +1,12 @@
+local fulgoraCliffExplosive = table.deepcopy(data.raw["capsule"]["cliff-explosives"])
+fulgoraCliffExplosive.name = "cliffillworld_fulgoran_cliff_explosive"
+fulgoraCliffExplosive.default_import_location = "fulgora"
+fulgoraCliffExplosive.weight = 1100000
+local nauvisCliffExplosive = table.deepcopy(data.raw["capsule"]["cliff-explosives"])
+nauvisCliffExplosive.name = "cliffillworld_nauvis_cliff_explosive"
+nauvisCliffExplosive.default_import_location = "nauvis"
+nauvisCliffExplosive.weight = 1100000
+
 data:extend({
     --Fulgora landfill items
     {
@@ -30,6 +39,7 @@ data:extend({
             tile_condition = {}
         }
     },
+    fulgoraCliffExplosive,
 
     --Fulgora landfill recipes
     {
@@ -44,7 +54,8 @@ data:extend({
             {type = "item", name = "stone", amount = 50},
             {type = "item", name = "rail-support", amount = 1},
         },
-        results = {{type = "item", name = "cliffillworld_fulgoran_light_landfill", amount = 16}}
+        results = {{type = "item", name = "cliffillworld_fulgoran_light_landfill", amount = 16}},
+        surface_conditions = {{property = "magnetic-field", min = 99, max = 99}},
     },
     {
         type = "recipe",
@@ -59,7 +70,8 @@ data:extend({
             {type = "item", name = "rail-support", amount = 2},
             {type = "item", name = "refined-concrete", amount = 10},
         },
-        results = {{type = "item", name = "cliffillworld_fulgoran_deep_landfill", amount = 16}}
+        results = {{type = "item", name = "cliffillworld_fulgoran_deep_landfill", amount = 16}},
+        surface_conditions = {{property = "magnetic-field", min = 99, max = 99}},
     },
 
     --Fulgora landfill tech
@@ -131,7 +143,8 @@ data:extend({
             {type = "item", name = "sulfur", amount = 10},
             {type = "item", name = "barrel", amount = 1},
         },
-        results = {{type = "item", name = "cliff-explosives", amount = 1}}
+        results = {{type = "item", name = "cliffillworld_fulgoran_cliff_explosive", amount = 1}},
+        surface_conditions = {{property = "magnetic-field", min = 99, max = 99}},
     },
 
     --Fulgora cliff explosives tech
@@ -192,7 +205,8 @@ data:extend({
             {type = "item", name = "tungsten-plate", amount = 1},
             {type = "item", name = "tungsten-carbide", amount = 1},
         },
-        results = {{type = "item", name = "cliffillworld_vulcanus_landfill", amount = 1}}
+        results = {{type = "item", name = "cliffillworld_vulcanus_landfill", amount = 1}},
+        surface_conditions = {{property = "pressure", min = 4000, max = 4000}},
     },
 
     --Vulcanus landfill tech
@@ -223,6 +237,7 @@ data:extend({
     },
 
     --Nauvis cliff explosives
+    nauvisCliffExplosive,
     {
         type = "recipe",
         name = "cliffillworld_nauvis_cliff_explosive",
@@ -234,7 +249,8 @@ data:extend({
             {type = "item", name = "grenade", amount = 1},
             {type = "item", name = "barrel", amount = 1},
         },
-        results = {{type = "item", name = "cliff-explosives", amount = 1}}
+        results = {{type = "item", name = "cliffillworld_nauvis_cliff_explosive", amount = 1}},
+        surface_conditions = {{property = "gravity", min = 10, max = 10}},
     },
 
     --Nauvis cliff explosives tech
