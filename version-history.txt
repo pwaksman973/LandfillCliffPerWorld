@@ -1,2 +1,5 @@
 Version 1.0.0:
+	- Fix tiles, can now use ctrl + z and be used in blueprints
+-----------------------------------------
+Version 1.0.0:
 	- Initial release
