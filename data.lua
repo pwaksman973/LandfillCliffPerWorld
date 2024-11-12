@@ -7,38 +7,51 @@ nauvisCliffExplosive.name = "cliffillworld_nauvis_cliff_explosive"
 nauvisCliffExplosive.default_import_location = "nauvis"
 nauvisCliffExplosive.weight = 1100000
 
+local fulgoranDustTile = table.deepcopy(data.raw["tile"]["fulgoran-dust"])
+fulgoranDustTile.name = "cliffillworld_tile_fulgoran_dust"
+fulgoranDustTile.mined_sound = "__base__/sound/deconstruct-bricks.ogg"
+fulgoranDustTile.is_foundation = true
+local fulgoranRockTile = table.deepcopy(data.raw["tile"]["fulgoran-rock"])
+fulgoranRockTile.name = "cliffillworld_tile_fulgoran_rock"
+fulgoranRockTile.mined_sound = "__base__/sound/deconstruct-bricks.ogg"
+fulgoranRockTile.is_foundation = true
+
+local fulgoranLightLandFill = table.deepcopy(data.raw["item"]["landfill"])
+fulgoranLightLandFill.name = "cliffillworld_fulgoran_light_landfill"
+fulgoranLightLandFill.icon = "__space-age__/graphics/terrain/fulgoran-dust.png"
+fulgoranLightLandFill.place_as_tile = {}
+fulgoranLightLandFill.place_as_tile.result = "cliffillworld_tile_fulgoran_dust"
+fulgoranLightLandFill.place_as_tile.condition_size = 1
+fulgoranLightLandFill.place_as_tile.condition = {layers = {ground_tile = true}}
+fulgoranLightLandFill.place_as_tile.tile_condition = {}
+local fulgoranDeepLandFill = table.deepcopy(data.raw["item"]["landfill"])
+fulgoranDeepLandFill.name = "cliffillworld_fulgoran_deep_landfill"
+fulgoranDeepLandFill.icon = "__space-age__/graphics/terrain/fulgoran-rock.png"
+fulgoranDeepLandFill.place_as_tile = {}
+fulgoranDeepLandFill.place_as_tile.result = "cliffillworld_tile_fulgoran_rock"
+fulgoranDeepLandFill.place_as_tile.condition_size = 1
+fulgoranDeepLandFill.place_as_tile.condition = {layers = {ground_tile = true}}
+fulgoranDeepLandFill.place_as_tile.tile_condition = {}
+
+local vulcanusLavaFillTile = table.deepcopy(data.raw["tile"]["volcanic-cracks-hot"])
+vulcanusLavaFillTile.name = "cliffillworld_tile_vulcanus_lavacrack"
+vulcanusLavaFillTile.mined_sound = "__base__/sound/deconstruct-bricks.ogg"
+vulcanusLavaFillTile.is_foundation = true
+local vulcanusLandFill = table.deepcopy(data.raw["item"]["landfill"])
+vulcanusLandFill.name = "cliffillworld_vulcanus_landfill"
+vulcanusLandFill.icon = "__space-age__/graphics/terrain/vulcanus/volcanic-cracks-hot.png"
+vulcanusLandFill.place_as_tile = {}
+vulcanusLandFill.place_as_tile.result = "cliffillworld_tile_vulcanus_lavacrack"
+vulcanusLandFill.place_as_tile.condition_size = 1
+vulcanusLandFill.place_as_tile.condition = {layers = {ground_tile = true}}
+vulcanusLandFill.place_as_tile.tile_condition = {}
+
 data:extend({
     --Fulgora landfill items
-    {
-        type = "item",
-        name = "cliffillworld_fulgoran_light_landfill",
-        icon = "__space-age__/graphics/terrain/fulgoran-dust.png",
-        icon_size = 64,
-        subgroup = "terrain",
-        order = "c[landfill]-a[dirt]",
-        stack_size = 200,
-        place_as_tile = {
-            result = "fulgoran-dust",
-            condition_size = 1,
-            condition = {layers = {ground_tile = true}},
-            tile_condition = {}
-        }
-    },
-    {
-        type = "item",
-        name = "cliffillworld_fulgoran_deep_landfill",
-        icon = "__space-age__/graphics/terrain/fulgoran-rock.png",
-        icon_size = 64,
-        subgroup = "terrain",
-        order = "c[landfill]-a[dirt]",
-        stack_size = 200,
-        place_as_tile = {
-            result = "fulgoran-rock",
-            condition_size = 1,
-            condition = {layers = {ground_tile = true}},
-            tile_condition = {}
-        }
-    },
+    fulgoranDustTile,
+    fulgoranLightLandFill,
+    fulgoranRockTile,
+    fulgoranDeepLandFill,
     fulgoraCliffExplosive,
 
     --Fulgora landfill recipes
@@ -174,22 +187,9 @@ data:extend({
         order = "b-d"
     },
 
-    --Vulcanus landfill item
-    {
-        type = "item",
-        name = "cliffillworld_vulcanus_landfill",
-        icon = "__space-age__/graphics/terrain/vulcanus/volcanic-cracks-hot.png",
-        icon_size = 64,
-        subgroup = "terrain",
-        order = "c[landfill]-a[lava]",
-        stack_size = 200,
-        place_as_tile = {
-            result = "volcanic-cracks-hot",
-            condition_size = 1,
-            condition = {layers = {ground_tile = true}},
-            tile_condition = {}
-        }
-    },
+    --Vulcanus landfill
+    vulcanusLavaFillTile,
+    vulcanusLandFill,
 
     --Vulcanus landfill recipe
     {
@@ -288,3 +288,7 @@ table.insert(fulgoran_deep_landfill,"oil-ocean-deep")
 local vulanus_landfill = data.raw.item.cliffillworld_vulcanus_landfill.place_as_tile.tile_condition
 table.insert(vulanus_landfill,"lava")
 table.insert(vulanus_landfill,"lava-hot")
+
+fulgoranDustTile.minable = {result = "cliffillworld_fulgoran_light_landfill", mining_time = 0.5, count = 1, }
+fulgoranRockTile.minable = {result = "cliffillworld_fulgoran_deep_landfill", mining_time = 0.5, count = 1, }
+vulcanusLavaFillTile.minable = {result = "cliffillworld_vulcanus_landfill", mining_time = 0.5, count = 1, }
